@@ -46,6 +46,7 @@ static int diff_no_prefix;
 static int diff_stat_graph_width;
 static int diff_dirstat_permille_default = 30;
 static struct diff_options default_diff_options;
+const struct diff_flags diff_flags_cleared = DIFF_FLAGS_INIT;
 static long diff_algorithm;
 static unsigned ws_error_highlight_default = WSEH_NEW;
 
@@ -5899,7 +5900,7 @@ int diff_can_quit_early(struct diff_options *opt)
 static int is_submodule_ignored(const char *path, struct diff_options *options)
 {
 	int ignored = 0;
-	unsigned orig_flags = options->flags;
+	struct diff_flags orig_flags = options->flags;
 	if (!DIFF_OPT_TST(options, OVERRIDE_SUBMODULE_CONFIG))
 		set_diffopt_flags_from_submodule_config(options, path);
 	if (DIFF_OPT_TST(options, IGNORE_SUBMODULES))
